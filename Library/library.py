@@ -69,3 +69,18 @@ class Library:
         # Remove the book from available books and add it to borrowed books
         del self.books[isbn]
         self.borrowed_books.add(isbn)
+
+
+###############RETURN BORROWED BOOK TO LIBRARRY#####################
+    def return_book(self, isbn):
+        """
+        Raises:
+            BookNotBorrowedError: If the book was not borrowed.
+        """
+        if isbn not in self.borrowed_books:
+            raise BookNotBorrowedError("Book not borrowed")
+
+        #Assume that book return add to borrow but it real you need to fetch it 
+        book = Book(isbn=isbn, title="Unknown", author="Unknown", publication_year=2000)
+        self.books[isbn] = book
+        self.borrowed_books.remove(isbn)
