@@ -84,3 +84,7 @@ class Library:
         book = Book(isbn=isbn, title="Unknown", author="Unknown", publication_year=2000)
         self.books[isbn] = book
         self.borrowed_books.remove(isbn)
+
+###############VIEW AVAIALABALE BOOKS IN LIBRARAY#######################
+    def view_available_books(self):
+        return list(self.books.values())

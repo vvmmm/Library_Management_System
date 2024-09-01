@@ -68,3 +68,18 @@ class TestLibraryManagement(unittest.TestCase):
         self.library.add_book(book)
         with self.assertRaises(BookNotBorrowedError):
             self.library.return_book("1234567890")
+
+
+#########TEST VIEW AVAILABLE BOOKS IN LIBRARY.###############
+    def test_view_available_books(self):
+        book1 = Book(isbn="1234567890", title="Test Book 1", author="Test Author 1", publication_year=2023)
+        book2 = Book(isbn="0987654321", title="Test Book 2", author="Test Author 2", publication_year=2022)
+        self.library.add_book(book1)
+        self.library.add_book(book2)
+        available_books = self.library.view_available_books()
+        self.assertEqual(len(available_books), 2)
+        self.assertIn(book1, available_books)
+        self.assertIn(book2, available_books)
+
+if __name__ == "__main__":
+    unittest.main()
