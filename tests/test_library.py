@@ -31,3 +31,11 @@ class TestLibraryManagement(unittest.TestCase):
         # year must be less then current year 2024
         with self.assertRaises(InvalidPublicationYearError):
             self.library.add_book(book)
+
+#########TEST BORROW BOOK SUCCESSFUL IN LIBRARY.###############
+    def test_borrow_book_success(self):
+        book = Book(isbn="1234567890", title="Test Book", author="Test Author", publication_year=2023)
+        self.library.add_book(book)
+        self.library.borrow_book("1234567890")
+        self.assertNotIn("1234567890", self.library.books)
+        self.assertIn("1234567890", self.library.borrowed_books)
