@@ -19,3 +19,15 @@ class TestLibraryManagement(unittest.TestCase):
         self.library.add_book(book)
         with self.assertRaises(BookAlreadyExistsError):
             self.library.add_book(book)
+            
+#########TEST ADD BOOK INVALID PUBLICATION IN LIBRARY.###############
+    def test_add_book_invalid_publication_year(self):
+        book = Book(isbn="1234567890", title="Test Book", author="Test Author", publication_year="invalid_year")
+        # year must be in Integer data type
+        with self.assertRaises(InvalidPublicationYearError):
+            self.library.add_book(book)
+            
+        book = Book(isbn="1234567890", title="Test Book", author="Test Author", publication_year=2025)
+        # year must be less then current year 2024
+        with self.assertRaises(InvalidPublicationYearError):
+            self.library.add_book(book)
